@@ -1,0 +1,14 @@
+<?php
+// vim: set et ts=4 sw=4 fdm=marker:
+    $DEF_DSN="mysql://xxxx:XXX@localhost/test";
+    $MAN_DSN="mysql://xxxx:XXX@localhost/test";
+    $DEBUG=true; # TODO:PREROLL Set to false before rolling to production
+    $DOMAIN="192.168.0.5";
+    $FROM_ADDR="webmaster@$DOMAIN";
+    $X_MAILER="$DOMAIN";
+    $TITLE_PREFIX="Small Talkies";
+    $SITE_NAME="Small Talkies";
+    $ACL="127.0.0.1";
+    $PIC_DIR="pics";
+    $PAGE_MAX = 4;
+?>

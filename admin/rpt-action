@@ -1,0 +1,15 @@
+#!/bin/sh
+FIFO='fifo/act'
+MODE=0666
+if [ ! -e $FIFO ]
+then
+	echo "making \`$FIFO'"
+	mkfifo $FIFO
+	chmod $MODE $FIFO
+else
+	echo "ERROR: fifo already existed: $FIFO"
+fi
+
+php rpt-action.php |grep -v DBG
+
+rm -v $FIFO

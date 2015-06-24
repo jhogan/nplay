@@ -1,0 +1,40 @@
+#!/bin/sh
+PACKDIR=~/pack
+DEST=$1
+
+if [ -z "$DEST" ]; then
+	echo "Destination needed (D, Q, P)"
+	exit 1
+fi
+
+if [ ! -d $PACKDIR ]; then
+	mkdir -v $PACKDIR
+
+fi
+
+D=/var/www/apache2-default/nplay0
+Q=~/q
+P=~/
+case $DEST in
+	D)
+		DEST=$D
+		;;
+	Q)
+		DEST=$Q
+		;;
+	P)
+		DEST=$P
+		;;
+	*)
+		if [ ! -d $DEST ]; then
+			echo "Directory doesn't exist:'$DEST'"
+			exit 1
+		fi
+esac
+
+cp -r $PACKDIR/ex/nplay/* $DEST
+cp    $PACKDIR/ex/bo/Business_Objects.php $DEST
+rm -r $PACKDIR/ex/bo
+
+chmod -v -R 740 $DEST/*
+chmod -v -R 700 $DEST/admin $DEST/3pconf

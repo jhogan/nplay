@@ -1,0 +1,40 @@
+#! /bin/sh
+TMPDIR=~/tmp
+TMPSTALKDIR=$TMPDIR/stalk
+PACKAGENAME=stalk
+PACKAGEPATH=$TMPSTALKDIR/$PACKAGENAME
+EXPORTDIR=$TMPSTALKDIR/ex
+EXPORTNPLAY=$EXPORTDIR/nplay
+EXPORTBO=$EXPORTDIR/bo
+SVNNPLAY=svn://odin/jjh/nplay 
+SVNJJH=svn://odin/jjh/
+SVNBO=svn://odin/jjh/phpbo/
+ZIPDIR=~/pack
+DEST=u49116054@smalltalkies.com:pack/
+
+if [ -f $TMPDIR ] ; then
+    rm -v $TMPDIR
+fi
+
+rm -rf $TMPSTALKDIR
+
+mkdir -p $EXPORTDIR
+mkdir -p $ZIPDIR
+cd $TMPSTALKDIR
+
+youngest=`svn log $SVNJJH 2>/dev/null|head -2 | grep ^r |awk -F "|" '{print $1}' |sed -e's/ *//g' -e's/r//'`
+zipfilepath=$ZIPDIR/$PACKAGENAME$youngest.tar.gz
+
+svn export -q $SVNNPLAY $EXPORTNPLAY
+svn export -q $SVNBO $EXPORTBO
+rm -v $EXPORTBO/COPY* $EXPORTNPLAY/todo $EXPORTNPLAY/setupLocals.php $EXPORTNPLAY/sorttest.php
+tar -cf $PACKAGENAME.tar ex/
+gzip $PACKAGENAME.tar
+mv $PACKAGEPATH.tar.gz $zipfilepath
+chmod 600 $zipfilepath
+read -n1 -p "Send to: $DEST [Y]" answer
+if [ "$answer" = "y" -o "$answer" = "Y" -o "$answer" = "" ] ; then
+	echo "connecting..."
+	scp -p $zipfilepath $DEST
+fi
+rm -rf $TMPSTALKDIR

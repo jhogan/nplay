@@ -1,0 +1,18 @@
+#!/bin/sh
+PACK=$1
+DEST=$2
+
+if [ ! -f "$PACK" ]; then
+	echo "Specify package"
+	exit 1
+fi
+dirname=`dirname $PACK`
+
+if [ -z "$DEST" ]; then
+	echo "Destination needed (D, Q, P)"
+	exit 1
+fi
+
+rm -r $dirname/ex/
+tar -C $dirname -zxf $PACK
+$dirname/ex/nplay/admin/install $DEST

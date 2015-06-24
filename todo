@@ -1,0 +1,50 @@
+app
+	Data
+		Movie
+			Run times
+			Rating (g\pg\r\etc..)
+			Country of origin
+			Language
+			Visiable
+	functionality
+		final functional sweep
+			# Add all actions logging
+			# Do we need $ob?
+			# Change db name from test to something more appropriate
+
+	security
+		# broken rules
+		# security holes
+		# standerdized on Exception handling (ProcessException())
+		# Make accessing illicite page appears as movies.php
+		# ensure email is tamper proof
+	aesthetics
+		# HTML aesthetics
+		# Captions
+		# XHTML
+		# Title needs to differ given page
+
+	Performance enhancing
+		# indexes
+
+	Final
+		# Add copyright info in each file
+		# code sanity check
+			# Use UpdateObject for UI persistenc
+			# use ProcessException() for UI exceptions
+			# Ensure __contruct is used
+			# Remove incorrect use of locale and editable vars
+		# Test with other browsers
+		Create database backup plan
+		Review html output for the release of sensitive data
+		Set production server up for ntp
+		check for todo comments
+		
+deployment
+	security
+		filesystem
+			fifo
+			pics
+			close directory browsing
+	misc
+		#develope system to remove lines that are commented as "development only"
